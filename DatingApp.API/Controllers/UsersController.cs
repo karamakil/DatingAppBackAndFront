@@ -6,9 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DatingApp.API.Controllers
 {
-    [Route("[controller]")]
-    [ApiController]
-    public class UsersController: ControllerBase
+    
+    public class UsersController: BaseApiController
     {
         public DataContext _Context { get; }
 
