@@ -20,11 +20,7 @@ namespace DatingApp.API.Controllers
         [HttpGet]
         public ActionResult<List<AppUser>> GetData()
         {
-            // using (var ctx = new DataContext())
-            // {
-            //     return ctx.Users.ToList();
-            // }
-            // return _Context.Users.ToList();
+            
 
             return new AppUser().GetAll();
         }
