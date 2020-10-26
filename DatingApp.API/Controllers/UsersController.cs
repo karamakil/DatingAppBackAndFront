@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DatingApp.API.Data;
 using DatingApp.API.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DatingApp.API.Controllers
@@ -19,13 +20,12 @@ namespace DatingApp.API.Controllers
         [HttpGet]
         public ActionResult<List<AppUser>> GetData()
         {
-            
-
             return new AppUser().GetAll();
         }
 
         // GET api/values/5
-        [HttpGet("{id}")]
+        [AllowAnonymous]
+        [HttpGet("{id:int}")]
         public ActionResult<AppUser> GetById(int id)
         {
             using (var ctx = new DataContext())
@@ -35,8 +35,9 @@ namespace DatingApp.API.Controllers
         }
 
         // GET api/values/""NAME""
+        [Authorize]
         [HttpGet("{name}")]
-        public ActionResult<AppUser> GetById(string name)
+        public ActionResult<AppUser> GetByName(string name)
         {
             using (var ctx = new DataContext())
             {
