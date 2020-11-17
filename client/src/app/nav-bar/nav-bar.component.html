@@ -1,0 +1,60 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <div class="container">
+
+        <a class="navbar-brand" href="#">Dating Applicatoin</a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto" *ngIf="accountService.currentUser$| async">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Matches</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Lists</a>
+                </li>
+
+                <!-- <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Messages</a>
+                </li>
+
+                <li class="nav-item" (click)="LogOut()">
+                    <a class="nav-link" href="#">Logout</a>
+                </li>
+            </ul>
+
+            <div class="dropdown" *ngIf="accountService.currentUser$| async" dropdown>
+                <a class="dropdown-toggle text-light" dropdownToggle>welcome user</a>
+                <div class="dropdown-menu" *dropdownMenu>
+                    <a href="#" class="dropdown-item">edit profile</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item" (click)="LogOut()">Logout</a>
+                </div>
+            </div>
+
+            <form *ngIf="(accountService.currentUser$| async) === null" #loginForm="ngForm" (ngSubmit)="LoginMethod()" autocomplete="off"
+                class="form-inline my-2 my-lg-0">
+                <input name="userName" [(ngModel)]="model.UserName" autocomplete="off" class="form-control mr-sm-2"
+                    type="text" placeholder="UserName" aria-label="UserName">
+                <input name="password" [(ngModel)]="model.Password" autocomplete="off" class="form-control mr-sm-2"
+                    type="password" placeholder="Password" aria-label="Password">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+
+            </form>
+        </div>
+
+    </div>
+
+
+</nav>
