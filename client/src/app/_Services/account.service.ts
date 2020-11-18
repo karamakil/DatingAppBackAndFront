@@ -15,6 +15,7 @@ export class AccountService {
 
   constructor(private http: HttpClient) { }
 
+  //#region Authentication Methods
   Login(model: any) {
     return this.http.post(this.baseUrl + 'account/login', model).pipe(
       map((response: User) => {
@@ -35,5 +36,25 @@ export class AccountService {
     localStorage.removeItem("User");
     this.currentUserSource.next(null);
   }
+  //#endregion
+
+
+  //#region Register User
+
+  Register(model: any) {
+    return this.http.post(this.baseUrl + "account/register", model).pipe(
+      map(
+        (user: User) => {
+          if (user) {
+            localStorage.setItem('User', JSON.stringify(user));
+            this.currentUserSource.next(user);
+          }
+          return user;
+        }
+      )
+    )
+  }
+
+  //#endregion
 
 }

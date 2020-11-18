@@ -16,18 +16,12 @@ export class AppComponent implements OnInit {
   users: any;
 
   ngOnInit() {
-    this.getUsers();
-
     this.setCurrentUser();
   }
 
-  constructor(private http: HttpClient, private accountService : AccountService) { };
+  constructor( private accountService : AccountService) { };
 
-  getUsers() {
-    this.http.get("http://localhost:5000/api/Users").subscribe(
-      Response => { this.users = Response; },
-      error => { console.log(error); });
-  }
+ 
 
   setCurrentUser()
   {
