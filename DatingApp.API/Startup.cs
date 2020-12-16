@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using DatingApp.API.Extensions;
+using DatingApp.API.MiddleWare;
 
 namespace DatingApp.API
 {
@@ -50,6 +51,8 @@ namespace DatingApp.API
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseMiddleware<ExceptionMiddleWare>();
 
             // app.UseHttpsRedirection();
 

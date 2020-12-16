@@ -10,18 +10,18 @@
     </div>
 
 
-    <div class="form-group">
+    <!-- <div class="form-group">
         <label>Who is your favorite user?</label>
         <select class="form-control">
             <option value="">--Please select value</option>
             <option *ngFor="let user of usersFromHomeComponents" [value]="user.userName">{{user.userName}} </option>
         
         </select>
-    </div>
+    </div> -->
 
     <div class="form-group text-center">
         <button class="btn btn-success mr-3" type="submit">Register</button>
-        <button class="btn btn-default mr-1" (click)="cancelled()" type="button">Cancel</button>
+        <button class="btn btn-default mr-1" (click)="CancelRegisterMethod()" type="button">Cancel</button>
     </div>
 
 </form>

@@ -23,6 +23,9 @@ export class AccountService {
         if (user) {
           localStorage.setItem("User", JSON.stringify(user));
           this.currentUserSource.next(user);
+
+          // this.currentUserSource.subscribe(res=> console.log(res.UserName+ "from login account service"));
+       
         }
       })
     );
