@@ -19,6 +19,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using DatingApp.API.Extensions;
 using DatingApp.API.MiddleWare;
+using AutoMapper;
+using DatingApp.API.Helpers;
 
 namespace DatingApp.API
 {
@@ -37,6 +39,8 @@ namespace DatingApp.API
             //la n5ale l 2osas mratabe 7ataynoehon be classes ApplicationServiceCollection
             services.AddApplicationServices(_Config);
             
+            
+
             services.AddControllers();
             services.AddCors();
 

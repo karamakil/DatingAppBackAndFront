@@ -1,48 +1,61 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
 using DatingApp.API.Data;
+using DatingApp.API.Data.DTO;
 using DatingApp.API.Entities;
+using DatingApp.API.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DatingApp.API.Controllers
 {
-    
-    public class UsersController: BaseApiController
+    [Authorize]
+    public class UsersController : BaseApiController
     {
-        public DataContext _Context { get; }
+        private readonly IUserRepository IuserRepository;
+        private readonly IMapper mapper;
 
-        public UsersController(DataContext context)
+        public UsersController(IUserRepository IuserRepository, IMapper mapper)
         {
-            _Context = context;
+            this.mapper = mapper;
+            this.IuserRepository = IuserRepository;
         }
 
         [HttpGet]
-        public ActionResult<List<AppUser>> GetData()
+        public async Task<ActionResult<IEnumerable<MemberDTO>>> GetUsers()
         {
-            return new AppUser().GetAll();
+            // var users = await this.IuserRepository.GetUsersAsync();
+            // var retVal = this.mapper.Map<IEnumerable<MemberDTO>>(users);
+            // return Ok(retVal);
+            var retVal = await this.IuserRepository.GetMembersAsync();
+            return Ok(retVal);
         }
 
         // GET api/values/5
-        [AllowAnonymous]
+        // [AllowAnonymous]
         [HttpGet("{id:int}")]
-        public ActionResult<AppUser> GetById(int id)
+        public async Task<ActionResult<MemberDTO>> GetById(int id)
         {
-            using (var ctx = new DataContext())
-            {
-                return ctx.Users.FirstOrDefault(x=> x.Id == id);
-            }
+            var user = await this.IuserRepository.GetUserByIdAsync(id);
+            var retVal = this.mapper.Map<MemberDTO>(user);
+            return retVal;
         }
 
         // GET api/values/""NAME""
-        [Authorize]
-        [HttpGet("{name}")]
-        public ActionResult<AppUser> GetByName(string name)
+        // [Authorize]
+        [HttpGet("{userName}")]
+        public async Task<ActionResult<MemberDTO>> GetByName(string userName)
         {
-            using (var ctx = new DataContext())
-            {
-                return ctx.Users.FirstOrDefault(x=> x.UserName == name);
-            }
+            // var user = await this.IuserRepository.GetUserByUserNameAsync(userName);
+            // var retVal = this.mapper.Map<AppUser,MemberDTO>(user);
+            // return retVal;
+            return await this.IuserRepository.GetMember(userName);
+
+
         }
+
+
     }
 }
