@@ -14,26 +14,24 @@ import { AccountService } from '../_Services/account.service';
 export class NavBarComponent implements OnInit {
 
   model: any = {};
-  
   user: any = {};
+  Ousername: any;
 
-   Ousername :any;
-
-  constructor(public accountService: AccountService, private router: Router,private toastr: ToastrService) {
+  constructor(public accountService: AccountService, private router: Router, private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
-    // this.accountService.currentUser$.subscribe(n=>{
-    //   this.Ousername = n.UserName
-    // });
+    this.accountService.currentUser$.subscribe(n => {
+      this.Ousername = n?.userName
+    });
+
   }
 
   LoginMethod() {
-    debugger
     this.accountService.Login(this.model).subscribe(response => {
       console.log(response);
       this.router.navigateByUrl("/members")
-        this.toastr.success('Hello world!', 'Toastr fun!');
+      this.toastr.success('Hello world!', 'Toastr fun!');
     });
   }
 
@@ -42,6 +40,6 @@ export class NavBarComponent implements OnInit {
     this.router.navigateByUrl("/")
   }
 
-  
+
 
 }

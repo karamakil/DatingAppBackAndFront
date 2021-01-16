@@ -28,14 +28,14 @@
             </ul>
 
             <div class="dropdown" *ngIf="(accountService.currentUser$| async) as user" dropdown>
-                <p>{{Ousername}} o user</p>
-                <p>{{user.Token}}</p>
-                <p>{{accountService.currentUser$}}</p>
+                <!-- <p>{{Ousername}} o user</p>
+                <p>{{user.userName}}</p> -->
+                 
 
-
-                <a class="dropdown-toggle text-light" dropdownToggle>welcome {{user.UserName}}</a>
+                
+                <a class="dropdown-toggle text-light" dropdownToggle>welcome {{user.userName}}</a>
                 <div class="dropdown-menu" *dropdownMenu>
-                    <a href="#" class="dropdown-item">edit profile</a>
+                    <a href="#" class="dropdown-item" routerLink="./members/edit" >edit profile</a>
                     <div class="dropdown-divider"></div>
                     <a href="#" class="dropdown-item" (click)="LogOut()">Logout</a>
                 </div>
