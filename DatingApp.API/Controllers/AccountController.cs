@@ -55,8 +55,9 @@ namespace DatingApp.API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserDTO>> Login(LoginDTO loginDTO)
         {
-            var user = await this.context.Users.
-            FirstOrDefaultAsync(x => x.UserName == loginDTO.UserName);
+            var user = await this.context.Users.Include("Photos")
+            .FirstOrDefaultAsync(x => x.UserName == loginDTO.UserName);
+            
             if (user == null) return Unauthorized("Invaled userName");
             using var hash = new HMACSHA512(user.PasswordSalt);
             var pas = hash.ComputeHash(Encoding.UTF8.GetBytes(loginDTO.Password));
@@ -68,7 +69,8 @@ namespace DatingApp.API.Controllers
             return new UserDTO()
             {
                 UserName = user.UserName,
-                Token = this.tokenService.CreateToken(user)
+                Token = this.tokenService.CreateToken(user),
+                photoUrl = user.Photos.FirstOrDefault(x=> x.IsMain)?.Url,
             };
         }
 

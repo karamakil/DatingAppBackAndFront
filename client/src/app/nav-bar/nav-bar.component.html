@@ -20,19 +20,15 @@
                         <a class="nav-link" href="#">Logout</a>
                     </li>
                 </ng-container>
-
                 <li class="nav-item">
                     <a class="nav-link" routerLink="/errors" >errors</a>
                 </li>
-
             </ul>
 
-            <div class="dropdown" *ngIf="(accountService.currentUser$| async) as user" dropdown>
-                <!-- <p>{{Ousername}} o user</p>
-                <p>{{user.userName}}</p> -->
-                 
 
-                
+
+            <div class="dropdown" *ngIf="(accountService.currentUser$| async) as user" dropdown>
+                <img src="{{user.photoUrl}}" alt="{{user.userName}}">
                 <a class="dropdown-toggle text-light" dropdownToggle>welcome {{user.userName}}</a>
                 <div class="dropdown-menu" *dropdownMenu>
                     <a href="#" class="dropdown-item" routerLink="./members/edit" >edit profile</a>
@@ -40,6 +36,9 @@
                     <a href="#" class="dropdown-item" (click)="LogOut()">Logout</a>
                 </div>
             </div>
+
+
+
 
             <form *ngIf="(accountService.currentUser$| async) === null" #loginForm="ngForm" (ngSubmit)="LoginMethod()"
                 autocomplete="off" class="form-inline my-2 my-lg-0">

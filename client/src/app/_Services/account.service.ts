@@ -18,42 +18,29 @@ export class AccountService {
 
   constructor(private http: HttpClient) { }
 
-  //#region Authentication Methods
   Login(model: any) {
     return this.http.post(this.baseUrl + 'account/login', model).pipe(
       map((response: User) => {
         const user = response;
         if (user) {
-          localStorage.setItem("User", JSON.stringify(user));
-          this.currentUserSource.next(user);
-
+          this.SetCurrentUser(user);
           // this.currentUserSource.subscribe(res=> console.log(res.UserName+ "from login account service"));
-       
         }
       })
     );
-  }
-
-  SetCurrentUser(user: User) {
-    this.currentUserSource.next(user);
   }
 
   Logout() {
     localStorage.removeItem("User");
     this.currentUserSource.next(null);
   }
-  //#endregion
-
-
-  //#region Register User
 
   Register(model: any) {
     return this.http.post(this.baseUrl + "account/register", model).pipe(
       map(
         (user: User) => {
           if (user) {
-            localStorage.setItem('User', JSON.stringify(user));
-            this.currentUserSource.next(user);
+            this.SetCurrentUser(user);
           }
           return user;
         }
@@ -61,6 +48,10 @@ export class AccountService {
     )
   }
 
-  //#endregion
+  SetCurrentUser(user: User) {
+    localStorage.setItem('User', JSON.stringify(user));
+    this.currentUserSource.next(user);
+  }
+
 
 }

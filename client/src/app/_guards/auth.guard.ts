@@ -13,12 +13,20 @@ export class AuthGuard implements CanActivate {
   constructor(private accountService: AccountService, private toastr: ToastrService) { };
 
   canActivate(): Observable<boolean> {
+    // let retVal;
+    // this.accountService.currentUser$.subscribe(x=> retVal = x);
+    // if (retVal) {
+    //   return true;
+    // }
+    // this.toastr.error("not auth");
     return this.accountService.currentUser$.pipe(
       map(user => {
         if (user) { return true };
         this.toastr.error("not auth")
       })
     )
+
+
   }
 
 }

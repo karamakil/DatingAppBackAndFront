@@ -13,10 +13,15 @@ namespace DatingApp.API.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
+
+            services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
+
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
-            
+
+            services.AddScoped<IPhotoService,PhotoService>();
+
             services.AddScoped<ITokenService, TokenService>();
-            services.AddScoped<IUserRepository,UserReporsitory>();
+            services.AddScoped<IUserRepository, UserReporsitory>();
             services.AddDbContext<DataContext>(x =>
             x.UseSqlServer(config.GetConnectionString("DefaultConnection"))
             );

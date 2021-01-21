@@ -31,7 +31,8 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button  [disabled]="!formEdit.dirty" id="btnSubmit" form="FormEdit" type="submit" class="btn btn-primary btn-block">Save Changes</button>
+                    <button [disabled]="!formEdit.dirty" id="btnSubmit" form="FormEdit" type="submit"
+                        class="btn btn-primary btn-block">Save Changes</button>
                 </div>
 
             </div>
@@ -40,30 +41,33 @@
             <tabset class="member-tabset">
                 <tab heading="About {{MemberProp.knownAs}}">
 
-                    <form #formEdit="ngForm" id="FormEdit" (ngSubmit)="UpdateMember()" >
+                    <form #formEdit="ngForm" id="FormEdit" (ngSubmit)="UpdateMember()">
                         <h4>Description</h4>
-                        <textarea class="form-control" [(ngModel)]="MemberProp.introduction" name="introduction" id="txtAreaIntroductionId" rows="6"></textarea>
-                       
+                        <textarea class="form-control" [(ngModel)]="MemberProp.introduction" name="introduction"
+                            id="txtAreaIntroductionId" rows="6"></textarea>
+
                         <h4 class="mt-2">Looking For</h4>
-                        <textarea class="form-control" [(ngModel)]="MemberProp.lookingFor" name="lookingFor" id="txtAreaLookingFOrId" rows="6"></textarea>
+                        <textarea class="form-control" [(ngModel)]="MemberProp.lookingFor" name="lookingFor"
+                            id="txtAreaLookingFOrId" rows="6"></textarea>
 
                         <h4 class="mt-2">Interests</h4>
-                        <textarea class="form-control" [(ngModel)]="MemberProp.interests" name="interests" id="txtAreaInterestsId" rows="6"></textarea>
+                        <textarea class="form-control" [(ngModel)]="MemberProp.interests" name="interests"
+                            id="txtAreaInterestsId" rows="6"></textarea>
 
                         <h4>Location Details:</h4>
                         <div class="form-inline">
                             <label for="City">City:</label>
                             <input [(ngModel)]="MemberProp.city" type="text" name="city" class="form-control mx-2">
                             <label for="City">Country:</label>
-                            <input [(ngModel)]="MemberProp.country" type="text" name="country" class="form-control mx-2">
+                            <input [(ngModel)]="MemberProp.country" type="text" name="country"
+                                class="form-control mx-2">
                         </div>
 
                     </form>
                 </tab>
                 <tab heading="Edit Photos">
-                    <p>Photo Edit will go here</p>
+                    <app-photo-editor [member]="MemberProp"></app-photo-editor>
                 </tab>
-                
             </tabset>
         </div>
     </div>
