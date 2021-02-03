@@ -9,6 +9,19 @@
     }
   },
   "profiles": {
+
+    "Watch": {
+      "workingDirectory": "$(ProjectDir)",
+      "commandLineArgs": "watch run",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "executablePath": "C:\\Program Files\\dotnet\\dotnet.exe",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:5000"
+    },
+
+
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,

@@ -13,7 +13,8 @@ export class AccountService {
 
   //environment is the file in the environments folder used to store values
   private baseUrl = environment.apiUrl;
-  private currentUserSource = new ReplaySubject<User>();
+  private currentUserSource = new ReplaySubject<User>(null);
+  
   public currentUser$ = this.currentUserSource.asObservable();
 
   constructor(private http: HttpClient) { }

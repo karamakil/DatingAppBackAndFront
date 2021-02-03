@@ -2,6 +2,8 @@ export class User {
     userName: string;
     token: string;
     photoUrl: string;
+    KnownAs: string;
+    Gender:string;
 }
 
 //Testing

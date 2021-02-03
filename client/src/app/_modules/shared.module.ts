@@ -8,6 +8,8 @@ import { HttpClientModule} from '@angular/common/http';
 import { FileUploadModule } from 'ng2-file-upload';
 import { ReactiveFormsModule } from '@angular/forms';
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker'
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { TimeagoModule } from 'ngx-timeago';
 
 @NgModule({
   declarations: [],
@@ -21,6 +23,8 @@ import {BsDatepickerModule} from 'ngx-bootstrap/datepicker'
     FileUploadModule,
     ReactiveFormsModule,
     BsDatepickerModule.forRoot(),
+    PaginationModule.forRoot(),
+    TimeagoModule.forRoot()
   ],
   exports: [
     ToastrModule,
@@ -29,7 +33,9 @@ import {BsDatepickerModule} from 'ngx-bootstrap/datepicker'
     NgxGalleryModule,
     FileUploadModule,
     ReactiveFormsModule,
-    BsDatepickerModule
+    BsDatepickerModule,
+    PaginationModule,
+    TimeagoModule
   ]
 })
 export class SharedModule { }

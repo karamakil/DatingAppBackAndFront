@@ -30,6 +30,7 @@ import { PhotoEditorComponent } from './members/photo-editor/photo-editor.compon
 import { FileUploadModule } from 'ng2-file-upload';
 import { TextInputComponent } from './_Forms/text-input/text-input.component';
 import { DateInputComponent } from './_forms/date-input/date-input.component';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,7 @@ import { DateInputComponent } from './_forms/date-input/date-input.component';
     FormsModule,
     SharedModule,
     NgxSpinnerModule,
-    
+    ButtonsModule.forRoot(),
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass:ErrorInterceptorInterceptor, multi:true},

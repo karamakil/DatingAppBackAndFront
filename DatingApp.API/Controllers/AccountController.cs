@@ -47,16 +47,14 @@ namespace DatingApp.API.Controllers
                 // user.UserName = registerDTO.UserName.ToLower();
                 // user.Password = hash.ComputeHash(Encoding.UTF8.GetBytes(registerDTO.Password));
                 // user.PasswordSalt = hash.Key;
-
-
                 this.context.Users.Add(user);
                 await context.SaveChangesAsync();
-
                 return new UserDTO()
                 {
                     UserName = user.UserName,
                     Token = this.tokenService.CreateToken(user),
                     KnownAs = user.KnownAs,
+                    Gender = user.Gender,
                 };
             }
         }
@@ -86,6 +84,7 @@ namespace DatingApp.API.Controllers
                 Token = this.tokenService.CreateToken(user),
                 photoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
                 KnownAs = user.KnownAs,
+                Gender = user.Gender,
             };
         }
 

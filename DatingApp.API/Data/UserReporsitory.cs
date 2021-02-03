@@ -1,12 +1,14 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using DatingApp.API.Data.DTO;
 using DatingApp.API.Entities;
+using DatingApp.API.Helpers;
 using DatingApp.API.Interface;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace DatingApp.API.Data
 {
@@ -30,17 +32,27 @@ namespace DatingApp.API.Data
         public async Task<MemberDTO> GetMember(string userName)
         {
             return await dataContext.Users
-            .Where(x=> x.UserName == userName)
+            .Where(x => x.UserName == userName)
             .ProjectTo<MemberDTO>(imapper.ConfigurationProvider)
             .FirstOrDefaultAsync();
-            
+
         }
 
-        public async Task<IEnumerable<MemberDTO>> GetMembersAsync()
+        public async Task<PagedList<MemberDTO>> GetMembersAsync(UserParams userParams)
         {
-            return await dataContext.Users
-            .ProjectTo<MemberDTO>(imapper.ConfigurationProvider)
-            .ToListAsync();
+            var query = dataContext.Users.AsQueryable();
+            query = query.Where(x => x.UserName != userParams.CurrentUserName);
+            query = query.Where(x => x.Gender == userParams.Gender);
+            var minDob = DateTime.Today.AddYears(-userParams.maxAge - 1);
+            var maxDob = DateTime.Today.AddYears(-userParams.minAge);
+            query = query.Where(x => x.DateOfBirth >= minDob && x.DateOfBirth <= maxDob);
+            query = userParams.OrderBy switch
+            {
+                "lastCreated" => query.OrderByDescending(c => c.Created),
+                _ => query.OrderByDescending(u => u.LastActive)
+            };
+            return await PagedList<MemberDTO>.CreateAsync(query.ProjectTo<MemberDTO>(imapper.ConfigurationProvider).AsNoTracking()
+                , userParams.PageNumber, userParams.PageSize);
         }
 
         public async Task<AppUser> GetUserByIdAsync(int id)
