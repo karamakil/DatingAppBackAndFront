@@ -22,6 +22,7 @@ namespace DatingApp.API.Extensions
             services.AddScoped<IPhotoService, PhotoService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUserRepository, UserReporsitory>();
+            services.AddScoped<ILikesRepository, LikesRepository>();
 
             services.AddDbContext<DataContext>(x =>
             x.UseSqlServer(config.GetConnectionString("DefaultConnection"))

@@ -60,7 +60,6 @@ export class MembersService {
       }));
   }
 
-
   public getPaginationResult<T>(url, params) {
     let paginatedResult: PaginatedResult<T> = new PaginatedResult<T>();
     return this.http.get<T>(url, { observe: "response", params }).pipe(
@@ -126,5 +125,17 @@ export class MembersService {
     this.userParams = new UserParams(this.user);
     return this.userParams;
   }
- 
+
+  //when sending post requets always send body 
+  public AddLike(userName: string) {
+    return this.http.post(this.baseUrl + "likes/" + userName, {});
+  }
+
+  public GetLikes(predicate: string, pageNumber, pageSize) {
+    var params = this.GetPaginationHeaders(pageNumber, pageSize);
+    params = params.append("predicate", predicate);
+    // return this.http.get<Partial<Member[]>>(this.baseUrl + "likes?predicate=" + predicate);
+    return this.getPaginationResult<Partial<Member[]>>(this.baseUrl + "likes", params);
+  }
+
 }

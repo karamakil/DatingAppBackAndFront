@@ -6,7 +6,7 @@
             <li class="list-inline-item">
                 <button class="btn btn-primary m-1" routerLink="/members/{{memberInput.userName}}"><i
                         class="fa fa-user"></i></button>
-                <button class="btn btn-primary m-1"><i class="fa fa-heart"></i></button>
+                <button class="btn btn-primary m-1" (click)="AddLike(memberInput)" ><i class="fa fa-heart"></i></button>
                 <button class="btn btn-primary m-1"><i class="fa fa-envelope"></i></button>
             </li>
         </ul>

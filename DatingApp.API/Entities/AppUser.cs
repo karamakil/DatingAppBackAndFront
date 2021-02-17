@@ -14,7 +14,6 @@ namespace DatingApp.API.Entities
         public string LastName { get; set; }
         public byte[] Password { get; set; }
         public byte[] PasswordSalt { get; set; }
-
         public DateTime DateOfBirth { get; set; }   
         public string KnownAs { get; set; }
         public DateTime Created { get; set; }=DateTime.Now;
@@ -26,17 +25,19 @@ namespace DatingApp.API.Entities
         public string City { get; set; }
         public string Country { get; set; }
         public ICollection<Photo> Photos { get; set; }
+        public ICollection<UserLike> LikedByUsers { get; set; }
+        public ICollection<UserLike> LikedUsers { get; set; }
 
-       #endregion
+        #endregion
 
-       #region Public Methods
+        #region Public Methods
 
-    //    public int GetAge()
-    //    {
-    //        return this.DateOfBirth.CalculateAge();
-    //    }
-           
-       #endregion
-        
+        //    public int GetAge()
+        //    {
+        //        return this.DateOfBirth.CalculateAge();
+        //    }
+
+        #endregion
+
     }
 }

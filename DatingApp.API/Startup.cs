@@ -36,22 +36,14 @@ namespace DatingApp.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             //la n5ale l 2osas mratabe 7ataynoehon be classes IdentityServiceCollection
             services.AddIdentityServices(_Config);
 
             //la n5ale l 2osas mratabe 7ataynoehon be classes ApplicationServiceExtension
             services.AddApplicationServices(_Config);
             
-            
-
             services.AddControllers();
             services.AddCors();
-
-            
-
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
