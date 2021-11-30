@@ -1,0 +1,77 @@
+<form [formGroup]="reactiveForm" (ngSubmit)="this.reactiveForm.valid && register()">
+
+    <h1 class="text-center text-primary"> sign up</h1>
+
+    <!-- <div class="form-group">
+        <input [class.is-invalid]='reactiveForm.get("userName").errors != null
+        && reactiveForm.get("userName").touched == true'
+        type="text" class="form-control" formControlName="userName"
+        placeholder="User Name">
+        <div class="invalid-feedback">Please enter user name</div>
+    </div>
+    <div class="form-group">
+        <input
+        [class.is-invalid]='reactiveForm.get("password").errors 
+        && reactiveForm.get("password").touched'
+         type="password" class="form-control" formControlName="password"
+          placeholder="Password">
+         <div *ngIf="reactiveForm.get('password').hasError('required')"
+          class="invalid-feedback">Please enter password</div>
+          <div *ngIf="reactiveForm.get('password').hasError('minlength')"
+          class="invalid-feedback">Password must be at least four chars</div>
+          <div *ngIf="reactiveForm.get('password').hasError('maxlength')"
+          class="invalid-feedback">Password must be at most eight chars</div>
+    </div>
+    <div class="form-group">
+        <input
+        [class.is-invalid]='reactiveForm.get("confirmPassword").errors
+        && reactiveForm.get("confirmPassword").touched'
+         type="password" class="form-control" formControlName="confirmPassword"
+          placeholder="Confirm password">
+          <div *ngIf="reactiveForm.get('confirmPassword').hasError('required')"
+          class="invalid-feedback">Please enter confirmed password</div>
+          <div *ngIf="reactiveForm.get('confirmPassword').hasError('isMatching')"
+          class="invalid-feedback">Password must be matched</div>
+    </div> -->
+
+    <div class="form-group">
+        <label class="control-label" style="margin-right:10px"> Iam a:</label>
+        <label class="radio-inline">
+            <input type="radio" value="male" formControlName="gender">male
+        </label>
+        <label class="radio-inline">
+            <input type="radio" value="female" formControlName="gender" class="ml-3">female
+        </label>
+    </div>
+
+    <app-text-input [formControl]="reactiveForm.controls['userName']" [label]='"user Name"'></app-text-input>
+    <app-text-input [formControl]="reactiveForm.controls['knownAs']" [label]='"know As"'></app-text-input>
+
+    <app-date-input [formControl]="reactiveForm.controls['dateOfBirth']" [label]='"Date Of Birth"'
+        [maxDate]="this.maxDate"></app-date-input>
+
+    <app-text-input [formControl]="reactiveForm.controls['city']" [label]='"City"'></app-text-input>
+    <app-text-input [formControl]="reactiveForm.controls['country']" [label]='"Country"'></app-text-input>
+    <app-text-input [formControl]="reactiveForm.controls['password']" [label]='"password"' [type]='"password"'>
+    </app-text-input>
+    <app-text-input [formControl]="reactiveForm.controls['confirmPassword']" [label]='"confirmPassword"'
+        [type]='"password"'></app-text-input>
+
+
+    <div class="row mt-5" *ngIf="validationErrors.length != 0">
+        <ul class="text-danger">
+            <li *ngFor="let error of validationErrors">
+                {{error}}
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="form-group text-center">
+        <button [disabled]="!this.reactiveForm.valid" class="btn btn-success mr-3" type="submit">Register</button>
+        <button class="btn btn-default mr-1" (click)="CancelRegisterMethod()" type="button">Cancel</button>
+    </div>
+</form>
+
+<!-- <p>Form Value: {{reactiveForm.value | json}}</p>
+<p>Form status: {{reactiveForm.status | json}}</p> -->
